@@ -1,42 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Swing : MonoBehaviour
-{
-    // Start is called before the first frame update
-
-    // Update is called once per frame
+public class Swing : MonoBehaviour 
+{ 
 
     public bool no =false;
 
-    bool Going = false;
 
-    Vector3 back;
-
-    [SerializeField] GameObject gz;
+    public bool Going = false;
 
     [SerializeField] Animator animator;
 
     public keet keet;
 
-    public touched touch;
+    private float time;
 
-    private void Start()
-    {
-        back = gz.transform.position;
-    }
     void Update()
     {
         no = keet.hit;
 
-
         if (transform.localScale.y == 0.5)
         {
-            Debug.Log("normal");
+            time += Time.deltaTime;
+            if (time >= .5) 
+            {
+                Going = false;
+                animator.speed = 1;
+                time = 0;
+            }
         }
-
 
         if (!no && !Going)
         {
@@ -50,7 +41,6 @@ public class Swing : MonoBehaviour
         }
         else if(Going)
         {
-            
             transform.Rotate(0, 0, 0);
         }
 
@@ -59,18 +49,8 @@ public class Swing : MonoBehaviour
             Going = !Going;
             animator.SetBool("meets", true);
         }
-
-        /*
-        if (touch.shouHuiLai)
-        {
-            transform.Rotate(0, 0, 0);
-            Going = !Going;
-        }
-        */
-
-
-
-
+       
     }
+
 
 }

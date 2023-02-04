@@ -4,33 +4,65 @@ using UnityEngine;
 
 public class keet : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Animator animator;
+    [SerializeField] Swing swing;
+
+    private GameObject itemDelate;
 
     public GameObject us;
 
-    public bool hit = false;
+    public bool hit;
 
-    void Start()
-    {
-        
-    }
+    public int Ob = 0;
 
     // Update is called once per frame
     void Update()
     {
-        
+        // to stick the hook to the Waer.
+        // put those two gameobject together.
+
         transform.position = us.transform.position;
         transform.rotation = us.transform.rotation;
 
-        
+        if (!swing.Going) 
+        {
+            Destroy(itemDelate);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("outside"))
+        // to see if the hook is time to swing back.
+
+        switch (collision.transform.tag) 
         {
-            Debug.Log("OutSide Now!");
+            case "outside":
+                // if the hook going outside of the screen
+                // set the speed of the animation back quikly.
+                animator.speed = 2f;
+
+                Debug.Log("OutSide Now!");
+                break;
+
+            case "Gold":
+                // if the hook hooked something.
+                // set the speed of the animation bit slower.
+
+                itemDelate= collision.gameObject;
+
+                animator.speed = 1f;
+                Ob = 1;
+                Debug.Log("see that's gold");
+                break;
+
+            default:
+                hit=!hit; 
+                break;
+
         }
-        hit= !hit;
+
+        
+
     }
+
 }
