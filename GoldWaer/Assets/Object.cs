@@ -1,16 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     [SerializeField] GameObject Position;
 
     private bool beinghooked=false;
 
-    // Update is called once per frame
+    public Items items;
+
+    public Swing swing;
+
+    //
+
+    public int type;
+
+    public float speed;
+
+    public float price;
+
+    public Vector3 scale;
+
+
+    //
+
+    private void Start()
+    {
+        
+    }
+
     void Update()
     {
         if (beinghooked) 
@@ -18,7 +35,12 @@ public class Object : MonoBehaviour
             gameObject.transform.position = Position.transform.position;
             gameObject.transform.rotation = Position.transform.rotation;
         }
-            
+
+        //Debug.Log(items.scale);
+
+        Speed(items);
+        Price(items);
+        Scale(items);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,6 +49,26 @@ public class Object : MonoBehaviour
         {
             beinghooked= true;
         }
-          
     }
+
+    public void Speed(Items items) 
+    {
+        speed=items.speed;
+    }
+
+    public void Price(Items items)
+    {
+        price=items.price;
+    }
+
+    public void Kinds(Items items) 
+    {
+        type = (int)items.type;
+    }
+
+    public void Scale(Items items) 
+    {
+        transform.localScale = items.scale;
+    }
+
 }

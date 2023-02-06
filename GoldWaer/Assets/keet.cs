@@ -1,85 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class keet : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+
     [SerializeField] Swing swing;
 
     private GameObject itemDelate;
-
-    Vector3 defalutScale;
 
     public GameObject us;
 
     public bool hit;
 
-    public int Ob = 0;
-
-    private void Start()
-    {
-       defalutScale=swing.transform.localScale; 
-    }
 
     // Update is called once per frame
     void Update()
     {
         // to stick the hook to the Waer.
         // put those two gameobject together.
-        //Debug.Log(currentScale);
-
-
+   
         transform.position = us.transform.position;
         transform.rotation = us.transform.rotation;
 
-        if (swing.transform.localScale==defalutScale) 
+        if (swing.transform.localScale==swing.defalutScale) 
         {
             swing.catched=false;
             Destroy(itemDelate);
         }
 
-    }
 
+        /*To prevent the hook would not drag two objects at a time.
+        if (swing.catched)
+        {
+            GetComponent<BoxCollider2D>().enabled= false;
+        }
+        else 
+        {
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
+        */
+
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // to see if the hook is time to swing back.
 
+        // if the the object not hit with the wall for swing.
+        // then let the varibale of the catched to be true.
+        if(collision.transform.tag!=null)
+            swing.catched = true;
+
         switch (collision.transform.tag) 
         {
-            case "outside":
-                // if the hook going outside of the screen
-                // set the speed of the animation back quikly.
-                //animator.speed = 2f;
-                catchGold(5f);
-                Debug.Log("OutSide Now!");
-                break;
-
-            case "Gold":
+            case "Object":
                 // if the hook hooked something.
                 // set the speed of the animation bit slower.
 
-                swing.catched = true;
                 itemDelate = collision.gameObject;
-                
-                Ob = 1;
-                Debug.Log("see that's gold");
+                passTheValue(collision.gameObject);
+
                 break;
 
-            default:
-                hit=!hit; 
+            default:       
+                hit =!hit; 
                 break;
-
-        }
-       
+        }   
     }
 
-    public void catchGold(float speed) 
+
+    public void passTheValue(GameObject gameObject) 
     {
-        swing.catched = true;
-
-        //swing.transform.localScale = Vector3.Lerp(swing.transform.localScale,defalutScale,speed*Time.deltaTime);
+        swing.speed = gameObject.GetComponent<Object>().speed;
+        swing.price = gameObject.GetComponent<Object>().price;
     }
-
 }
