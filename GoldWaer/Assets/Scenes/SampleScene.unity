@@ -1375,7 +1375,7 @@ GameObject:
   - component: {fileID: 684457810}
   m_Layer: 0
   m_Name: UnderGround
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3777,11 +3777,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesUp: 0
+  swing: {fileID: 427551170}
   loseMenu: {fileID: 1754798792}
   winMenu: {fileID: 875280448}
   TimeDisplay: {fileID: 992283163}
   GoalDisplay: {fileID: 1630560099}
-  time: 30
+  MoneyDisplay: {fileID: 564380385}
+  time: 80000
   MoneyGoal: 8000
 --- !u!1 &1403502401
 GameObject:
@@ -3927,7 +3929,7 @@ GameObject:
   - component: {fileID: 1430635090}
   m_Layer: 0
   m_Name: Mideground
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5066,6 +5068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swing: {fileID: 427551170}
   us: {fileID: 1476369253389953971}
+  price: 0
   hit: 0
 --- !u!61 &1844966451
 BoxCollider2D:
@@ -5403,7 +5406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025121170}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.49, y: 0, z: 0}
+  m_LocalPosition: {x: 14.84, y: 1.06, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []

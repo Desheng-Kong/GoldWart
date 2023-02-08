@@ -14,10 +14,13 @@ public class Swing : MonoBehaviour
     public Vector3 Hook;
     // set the speed of the IK.
     public float speed;
-    // set the price that from the object
+    // set the price that from the object.
     public float price;
     // a entry of the hook script.
     public keet keet;
+    // time ok to add the price.
+    public bool okTOadd =false;
+    // set the times that player can use bomb.
 
     private void Start()
     {
@@ -59,6 +62,13 @@ public class Swing : MonoBehaviour
                 // set the hook using variable back to false.
                 Going = false;
 
+                // time to add the price to the money UI.
+                okTOadd= true;
+            }
+
+            else 
+            {
+                okTOadd= false;
             }
         }
   
@@ -109,13 +119,8 @@ public class Swing : MonoBehaviour
 
             }
         }
-
-        
+  
     }
 
-    public void _hook(float speed) 
-    {
-
-    } 
 
 }
