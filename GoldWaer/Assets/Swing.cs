@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Swing : MonoBehaviour 
@@ -24,12 +25,19 @@ public class Swing : MonoBehaviour
     public int timesBomb;
     // set the group of the bomb.
     public Transform bombGroup;
+    // set the list of gameobject that needs to be delete.
+    public List<GameObject> BianPao;
     private void Start()
     {
         timesBomb = bombGroup.childCount;
         speed = 10f;
         defalutScale= transform.localScale;
         Hook = new Vector3(defalutScale.x, 5.5f);
+
+        foreach (Transform bianpao in bombGroup) 
+        {
+            BianPao.Add(bianpao.gameObject);
+        }
     }
 
     void Update()
@@ -41,7 +49,7 @@ public class Swing : MonoBehaviour
        
         if (catched)
         {
-            if (Input.GetKeyDown(KeyCode.W)) 
+            if (Input.GetKeyDown(KeyCode.W)&&timesBomb>0) 
             {
                 // let if back to normal state instead of waiting.
                 transform.localScale = defalutScale;
@@ -55,6 +63,11 @@ public class Swing : MonoBehaviour
                 // set the item price to be 0.
                 keet.price = 0;
 
+                // delete the UI of the bomb in the game.
+                BianPao[timesBomb-1].SetActive(false);
+
+                // set the timesBomb deduction after using it.
+                timesBomb -= 1;
             }
 
             // if the hook is about to back to the normal scale/postion.
