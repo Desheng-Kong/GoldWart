@@ -21,10 +21,13 @@ public class Swing : MonoBehaviour
     // time ok to add the price.
     public bool okTOadd =false;
     // set the times that player can use bomb.
-
+    public int timesBomb;
+    // set the group of the bomb.
+    public Transform bombGroup;
     private void Start()
     {
-        speed = 3f;
+        timesBomb = bombGroup.childCount;
+        speed = 10f;
         defalutScale= transform.localScale;
         Hook = new Vector3(defalutScale.x, 5.5f);
     }
@@ -44,10 +47,14 @@ public class Swing : MonoBehaviour
                 transform.localScale = defalutScale;
 
                 // reset the speed of the IK back to normal.
-                speed = 3.0f;
+                speed = 10.0f;
 
                 // set the hook using variable back to false.
                 Going = false;
+
+                // set the item price to be 0.
+                keet.price = 0;
+
             }
 
             // if the hook is about to back to the normal scale/postion.
@@ -57,7 +64,7 @@ public class Swing : MonoBehaviour
                 transform.localScale = defalutScale;
 
                 // reset the speed of the IK back to normal.
-                speed = 3.0f;
+                speed = 10.0f;
 
                 // set the hook using variable back to false.
                 Going = false;
@@ -104,7 +111,13 @@ public class Swing : MonoBehaviour
             if (!catched)
             {
                 // keep pull out the hook till it hits the boundary OR reach it's max length.
-                transform.localScale = Vector3.Lerp(transform.localScale, Hook, speed * Time.deltaTime);
+
+                //!!! lerp method moves object from fast to slow while the target is about to the destination//
+
+                //transform.localScale = Vector3.Lerp(transform.localScale, Hook, speed * Time.deltaTime);
+
+                // MoveTowards gives a uniform speed.
+                transform.localScale = Vector3.MoveTowards(transform.localScale, Hook, speed * Time.deltaTime);
             }
             // if the hook hooked anything duringn the pulling.
             else if(catched) 
@@ -115,7 +128,13 @@ public class Swing : MonoBehaviour
                 }
 
                 // drag back the hook by scale IK's lenth to normal state. 
-                transform.localScale = Vector3.Lerp(transform.localScale, defalutScale, speed * Time.deltaTime);
+
+                //!!! lerp method moves ob ject from fast to slow while the target is about to the destination//
+
+                //transform.localScale = Vector3.Lerp(transform.localScale, defalutScale, speed * Time.deltaTime);
+
+                // MoveTowards gives a uniform speed.
+                transform.localScale = Vector3.MoveTowards(transform.localScale, defalutScale, speed * Time.deltaTime);
 
             }
         }

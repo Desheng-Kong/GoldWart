@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659a0236036b9e5419acba43389bbdb6, type: 3}
   m_Name: BigStone
   m_EditorClassIdentifier: 
-  speed: 0.3
+  speed: 0.2
   price: 50
   type: 0
   scale: {x: 1, y: 1, z: 0}

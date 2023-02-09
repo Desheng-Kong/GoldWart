@@ -36,7 +36,15 @@ public class Timer : MonoBehaviour
             // set the time to equal zero.
             time = 0;
             // enable the losing menu.
-            loseMenu.SetActive(true);
+            if (swing.price >= MoneyGoal)
+            {
+                winMenu.SetActive(true);
+            }
+            else 
+            {
+                loseMenu.SetActive(true);
+            }
+            
             // 
             Debug.Log("timesUp");
         }
